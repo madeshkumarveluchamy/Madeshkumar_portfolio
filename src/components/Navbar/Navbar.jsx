@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 w-full z-50 p-4 flex justify-between items-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-gray-200 dark:border-slate-800 transition-colors">
       <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-        Dheena.dev
+        MK.dev
       </h1>
       
    
