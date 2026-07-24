@@ -188,7 +188,7 @@ const Contact = () => {
 
         {/* --- FOOTER --- */}
         <div className="mt-20 md:mt-32 pt-10 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-slate-600 text-[10px] font-mono uppercase tracking-[0.2em] text-center">© 2026 DHEENA. All Rights Reserved.</p>
+            <p className="text-slate-600 text-[10px] font-mono uppercase tracking-[0.2em] text-center">© 2026 MadeshKumarVeluchamy. All Rights Reserved.</p>
             <div className="flex gap-8">
                 <a href="https://github.com/madeshkumarveluchamy?tab=overview&from=2026-03-01&to=2026-03-24" className="text-slate-500 hover:text-white transition-colors"><Github size={20} /></a>
                 <a href="https://www.linkedin.com/in/madeshkumarveluchamy1111" className="text-slate-500 hover:text-white transition-colors"><Linkedin size={20} /></a>

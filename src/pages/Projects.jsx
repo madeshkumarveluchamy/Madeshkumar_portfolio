@@ -10,7 +10,7 @@ const Projects = () => {
     {
       title: "unimaxx architects and interiors",
       stack: ["React JS","Bootstrap"],
-      desc: "Real-time Kanban board for project management.",
+      desc: "Designed and developed a professional website for UNIMAXX Architects & Interiors to showcase architectural and interior design projects. Created a responsive, elegant interface with a focus on user experience and performance.",
       image: unimaxxlogo,
       github: "https://github.com/madeshkumarveluchamy/headphone-hub",
       live: "https://unimaxxarchitects.com/"
@@ -18,7 +18,7 @@ const Projects = () => {
     {
       title: "Good Looks Home Decor",
       stack: ["React JS","Bootstrap"],
-      desc: "Intelligent media gallery with AI auto-tagging.",
+      desc: "Developed a modern and responsive website for Good Look Home Decor to showcase interior design services and premium home décor solutions. Built with a clean UI, mobile-friendly design, and optimized performance.",
       image: profilepicture,
       github: "#",
       live: "https://goodlookhomedecor.com/"
@@ -26,7 +26,7 @@ const Projects = () => {
     {
       title: "Mars Automotive Designers",
       stack: ["React JS","Bootstrap"],
-      desc: "Live cryptocurrency dashboard with real-time charts.",
+      desc: "Developed a modern and responsive website for MARS Automotive Designers to showcase vehicle body container manufacturing solutions and custom fabrication services. Built with a professional UI, mobile-friendly design, and optimized performance.",
       image: brighttruckbackground,
       github: "#",
       live: "https://marsautomotivedesigners.com/"
@@ -100,17 +100,19 @@ const Projects = () => {
           {duplicatedProjects.map((proj, idx) => (
             // Cards-ku naduvula exact space maintain panna 'pr-8' add panni irukom
             <div key={idx} className="pr-8 shrink-0"> 
-              <div className="w-[350px] md:w-[450px] group relative bg-slate-900/20 border border-slate-800 rounded-[3rem] p-6 backdrop-blur-3xl overflow-hidden hover:border-blue-500/50 transition-all duration-500">
+              {/* ✅ ADDED: h-[540px] and flex flex-col for uniform card size */}
+              <div className="w-[350px] md:w-[450px] h-[540px] flex flex-col group relative bg-slate-900/20 border border-slate-800 rounded-[3rem] p-6 backdrop-blur-3xl overflow-hidden hover:border-blue-500/50 transition-all duration-500">
                 
-                {/* Image Section */}
-                <div className="w-full h-52 rounded-[2rem] overflow-hidden mb-6 relative pointer-events-none">
+                {/* Image Section - shrink-0 to maintain height */}
+                <div className="w-full h-52 shrink-0 rounded-[2rem] overflow-hidden mb-6 relative pointer-events-none">
                   <img src={proj.image} alt={proj.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
                 </div>
 
                 {/* Title & Desc */}
-                <div className="px-2 mb-6 pointer-events-none">
-                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2 group-hover:text-blue-500 transition-colors">
+                <div className="pointer-events-none">
+                  {/* ✅ ADDED: line-clamp-2 and min-h-[64px] to keep title height exact across all cards */}
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2 group-hover:text-blue-500 transition-colors line-clamp-2 min-h-[64px]">
                     {proj.title}
                   </h3>
                   <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
@@ -118,8 +120,8 @@ const Projects = () => {
                   </p>
                 </div>
 
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 px-2 mb-8 pointer-events-none">
+                {/* Tech Stack ✅ ADDED: mt-auto to push this and the buttons exactly to the bottom */}
+                <div className="flex flex-wrap gap-2 mt-auto mb-6 pointer-events-none">
                   {proj.stack.map((tech, tIdx) => (
                     <span key={tIdx} className="text-[10px] font-bold uppercase tracking-widest text-blue-400/70">
                       #{tech}
@@ -127,8 +129,8 @@ const Projects = () => {
                   ))}
                 </div>
 
-                {/* Links */}
-                <div className="flex items-center gap-4 px-2 relative z-10">
+                {/* Links - Always stays at the exact bottom */}
+                <div className="flex items-center gap-4 relative z-10 shrink-0">
                   <a href={proj.github} className="p-3 rounded-full bg-slate-950 border border-slate-800 text-white hover:bg-blue-500 transition-all" target="_blank" rel="noopener noreferrer">
                     <Github size={18} />
                   </a>
