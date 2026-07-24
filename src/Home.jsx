@@ -4,6 +4,7 @@ import Skills from './pages/Skills.jsx';
 import Tools from './pages/Tools.jsx';
 import Projects from './pages/Projects.jsx';
 import Contact from './pages/Contact.jsx';
+import FloatingContact from './components/FloatingContact.jsx';
 
 
 function Home() {
@@ -11,6 +12,7 @@ function Home() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
       <Navbar />
       <main className="container mx-auto pt-20">
+        <FloatingContact />
         <Hero />
         <Skills />
         <Tools />

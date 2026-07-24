@@ -75,10 +75,10 @@ const Hero = () => {
         </motion.div>
 
         {/* --- TEXT CONTENT --- */}
-        <motion.div variants={fadeInUp} className="space-y-4 md:space-y-6">
+        <motion.div variants={fadeInUp} className="space-y-4 md:space-y-6 pt-5">
           {/* Subtle Command line label */}
           <h2 className="text-blue-600/80 dark:text-blue-400 font-mono font-medium tracking-[0.2em] md:tracking-[0.3em] uppercase text-xs sm:text-sm md:text-base">
-            $ whoami --dheena
+            $ whoami --MadeshkumarVeluchamy
           </h2>
 
           {/* Heading - Vibrant Gradient applied only to accented part */}
@@ -91,8 +91,8 @@ const Hero = () => {
           </h1>
 
           <p className="max-w-xs sm:max-w-md md:max-w-2xl mx-auto text-slate-600 dark:text-slate-400 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
-            Final year student specializing in the MERN stack. Building career guidance 
-            platforms and automotive solutions with modern tech.
+            A FreeLancer specialized in the MERN stack. Building responsive websites
+             with modern tech.
           </p>
         </motion.div>
 
