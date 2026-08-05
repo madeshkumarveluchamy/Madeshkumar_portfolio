@@ -2,19 +2,43 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Mail, Linkedin, Github, Send, 
-  MapPin, MessageSquare, Sparkles, CheckCircle2 
+  MapPin, MessageSquare, Sparkles, CheckCircle2, Loader2 
 } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Puthusa add panniyirukku
 
-  const handleSubmit = (e) => {
+  // INGA UNGA GOOGLE APPS SCRIPT URL-A PASTE PANNANUM 👇
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzDJXgMEno7GbIToLydQwqcQLVBGnd6fHJjr41lWMT7pvGtt8o_P1F8eBbGzjzsqmJi/exec'; 
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // EmailJS or Backend integration inga varum
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', message: '' }); // Form clear panrom
-    setTimeout(() => setIsSubmitted(false), 5000);
+    setIsLoading(true);
+
+    // FormData create panni data-va append panrom
+    const data = new FormData();
+    data.append('name', formData.name);
+    data.append('email', formData.email);
+    data.append('message', formData.message);
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        body: data,
+        mode: 'no-cors' // Google Sheets-ku anuppum pothu CORS error thavirkka
+      });
+      
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', message: '' }); // Form clear panrom
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Oops! Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const contactDetails = [
@@ -95,7 +119,6 @@ const Contact = () => {
               </motion.a>
             ))}
 
-            {/* Availability Status Card */}
             <div className="p-6 md:p-8 bg-blue-500/5 border border-blue-500/20 rounded-[2rem] md:rounded-[2.5rem]">
                 <div className="flex items-center gap-3 mb-4">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
@@ -129,7 +152,6 @@ const Contact = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 relative z-10">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-                    {/* Name Input */}
                     <div className="space-y-2 md:space-y-3">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-4">Full Name</label>
                       <input 
@@ -141,7 +163,6 @@ const Contact = () => {
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
                       />
                     </div>
-                    {/* Email Input */}
                     <div className="space-y-2 md:space-y-3">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-4">Email Address</label>
                       <input 
@@ -155,7 +176,6 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  {/* Message Input */}
                   <div className="space-y-2 md:space-y-3">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-4">Your Message</label>
                     <textarea 
@@ -168,34 +188,34 @@ const Contact = () => {
                     />
                   </div>
 
-                  {/* Submit Button */}
                   <motion.button 
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
-                    className="w-full py-4 md:py-5 rounded-xl md:rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest flex items-center justify-center gap-3 transition-all shadow-[0_10px_30px_rgba(37,99,235,0.3)] text-xs md:text-sm"
+                    disabled={isLoading}
+                    className={`w-full py-4 md:py-5 rounded-xl md:rounded-2xl ${isLoading ? 'bg-blue-800 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500'} text-white font-black uppercase tracking-widest flex items-center justify-center gap-3 transition-all shadow-[0_10px_30px_rgba(37,99,235,0.3)] text-xs md:text-sm`}
                   >
-                    Send Message <Send size={18} />
+                    {isLoading ? (
+                      <>Sending... <Loader2 size={18} className="animate-spin" /></>
+                    ) : (
+                      <>Send Message <Send size={18} /></>
+                    )}
                   </motion.button>
                 </form>
               )}
-
-              {/* Shine effect parent-la 'group' iruntha thaan work agum */}
               <div className="absolute top-0 -inset-full h-full w-1/2 z-0 block transform -skew-x-12 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:animate-[shine_1.5s_ease-in-out]" />
             </motion.div>
           </div>
         </div>
 
-        {/* --- FOOTER --- */}
         <div className="mt-20 md:mt-32 pt-10 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-8">
             <p className="text-slate-600 text-[10px] font-mono uppercase tracking-[0.2em] text-center">© 2026 MadeshKumarVeluchamy. All Rights Reserved.</p>
             <div className="flex gap-8">
-                <a href="https://github.com/madeshkumarveluchamy?tab=overview&from=2026-03-01&to=2026-03-24" className="text-slate-500 hover:text-white transition-colors"><Github size={20} /></a>
+                <a href="https://github.com/madeshkumarveluchamy" className="text-slate-500 hover:text-white transition-colors"><Github size={20} /></a>
                 <a href="https://www.linkedin.com/in/madeshkumarveluchamy1111" className="text-slate-500 hover:text-white transition-colors"><Linkedin size={20} /></a>
                 <a href="mailto:madeshkumarveluchamy@gmail.com" className="text-slate-500 hover:text-white transition-colors"><MessageSquare size={20} /></a>
             </div>
         </div>
-
       </div>
     </div>
   );
